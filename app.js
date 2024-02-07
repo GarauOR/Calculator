@@ -8,11 +8,11 @@ btnList.forEach(btn => {
         else {
             switch (btn.textContent) {
                 case "C":
-                    console.log("C");
+                    display.value = "";
                     break;
 
                 case "DEL":
-                    console.log("DEL");
+                    display.value = display.value.slice(0, display.value.length-1);
                     break;
                 
                 case "=":
@@ -20,18 +20,17 @@ btnList.forEach(btn => {
                     break;
             }
         }
-        // use a switch operator with an action per each button
     });
 });
 
 //numHandler checks if +arr.lenght-1 is !NaN  true:concat every number clicked  false:push the clicked number
 //operatorHandler pushes in the arr the text content if arr.legth-1 is !NaN otherwise do nothing
 
-//cercare formula per radice quadrata e cambiare 000
+//replace 000 with square root
 
-function numHandler (numString) {
-    let lastItem = operationArr[operationArr.legth-1];
+// function numHandler (numString) {
+//     let lastItem = operationArr[operationArr.legth-1];
 
-    if (!isNaN(lastItem)) {lastItem.concat(numString)}
-    else {}
-}
+//     if (!isNaN(lastItem)) {lastItem.concat(numString)}
+//     else {}
+// }
