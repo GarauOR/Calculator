@@ -23,7 +23,7 @@ btnList.forEach(btn => {
                     break;
                 
                 case "=":
-                    operation();
+                    operation(display.value);
                     break;
             }
         }
@@ -35,9 +35,22 @@ btnList.forEach(btn => {
 
 //replace 000 with square root
 
-// function numHandler (numString) {
-//     let lastItem = operationArr[operationArr.legth-1];
+function operation (operationString) {
+    
+    if (operable(operationString)) {
+        console.log("working");
+    }
+}
 
-//     if (!isNaN(lastItem)) {lastItem.concat(numString)}
-//     else {}
-// }
+function operable (value) {
+    const operableCheck = ["/", "*", "-", "+"];
+    let operableResult = false;
+
+    operableCheck.forEach(item => {
+        if (value.includes(item)) {
+            operableResult = true;
+        }
+    })
+
+    return operableResult;
+}
