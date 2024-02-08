@@ -4,7 +4,12 @@ const display = document.querySelector("#display");
 btnList.forEach(btn => {
     btn.addEventListener("click", () => {
         let isDisplayable = ["C", "DEL", "="];
-        if (!isDisplayable.includes(btn.textContent)) {display.value += btn.textContent}
+        if (!isDisplayable.includes(btn.textContent)) {
+            if(!isNaN(btn.textContent)){display.value += btn.textContent }         
+            else {
+                if (display.value[display.value.length-1] !== " ") 
+                {display.value = display.value + " " + btn.textContent + " "};    
+        }}
         else {
             switch (btn.textContent) {
                 case "C":
@@ -16,7 +21,7 @@ btnList.forEach(btn => {
                     break;
                 
                 case "=":
-                    console.log("=");
+                    operation();
                     break;
             }
         }
