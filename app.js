@@ -17,7 +17,9 @@ btnList.forEach(btn => {
                     break;
 
                 case "DEL":
-                    display.value = display.value.slice(0, display.value.length-1);
+                    if (display.value[display.value.length-1] === " ")
+                    {display.value = display.value.slice(0, display.value.length-3);}
+                    else {display.value = display.value.slice(0, display.value.length-1);}
                     break;
                 
                 case "=":
