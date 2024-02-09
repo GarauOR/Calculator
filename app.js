@@ -5,7 +5,16 @@ btnList.forEach(btn => {
     btn.addEventListener("click", () => {
         let isDisplayable = ["C", "DEL", "="];
         if (!isDisplayable.includes(btn.textContent)) {
-            if(!isNaN(btn.textContent)){display.value += btn.textContent }         
+            if(!isNaN(btn.textContent)){display.value += btn.textContent }
+
+            else if (btn.textContent === ".") {
+                if (display.value[display.value.length-1] === " " ||
+                display.value.length < 1){
+                    display.value = display.value + "0" + btn.textContent
+                }
+                else if (!isNaN(display.value[display.value.length-1])) {display.value += btn.textContent}
+
+            }       
             else {
                 if (display.value[display.value.length-1] !== " ") 
                 {display.value = display.value + " " + btn.textContent + " "};    
@@ -36,6 +45,7 @@ function operation (operationString) {
     
     if (operable(operationString)) {
         let operationArr = operationString.split(" ");
+        console.log(operationArr);
         let index = 0;
 
         while (index < operationArr.length) {
@@ -57,7 +67,7 @@ function operation (operationString) {
         
 
 
-        console.log(operationArr);
+        // console.log(operationArr);
         //la funzione fa il return del risultato
     }
 }
