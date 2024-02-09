@@ -30,15 +30,35 @@ btnList.forEach(btn => {
     });
 });
 
-//numHandler checks if +arr.lenght-1 is !NaN  true:concat every number clicked  false:push the clicked number
-//operatorHandler pushes in the arr the text content if arr.legth-1 is !NaN otherwise do nothing
-
 //replace 000 with square root
 
 function operation (operationString) {
     
     if (operable(operationString)) {
-        console.log("working");
+        let operationArr = operationString.split(" ");
+        let index = 0;
+
+        while (index < operationArr.length) {
+            if (operationArr[index] === "/" || operationArr[index] === "*") {
+                if (operationArr[index] === "/") {
+                    const division = operationArr[index-1] / operationArr[index+1];
+                    operationArr.splice(index-1,3,`${division}`);
+                    index--
+                }
+                if (operationArr[index] === "*") {
+                    const multiplication = operationArr[index-1] * operationArr[index+1];
+                    operationArr.splice(index-1,3,`${multiplication}`);
+                    index--
+                }
+            }
+            index++
+        }
+        
+        
+
+
+        console.log(operationArr);
+        //la funzione fa il return del risultato
     }
 }
 
