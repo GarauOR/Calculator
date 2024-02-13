@@ -3,13 +3,11 @@ const display = document.querySelector("#display");
 
 btnList.forEach((btn) => {
   btn.addEventListener("click", () => {
-    let isDisplayable = ["C", "DEL", "="];
+    let isDisplayable = ["CE", "C", "=", "SQRT"];
     if (!isDisplayable.includes(btn.textContent)) {
       if (!isNaN(btn.textContent)) {
         display.value += btn.textContent;
-      }
-
-      else if (btn.textContent === ".") {
+      } else if (btn.textContent === ".") {
         if (onePoint(display.value)) {
           if (
             display.value[display.value.length - 1] === " " ||
@@ -20,22 +18,20 @@ btnList.forEach((btn) => {
             display.value += btn.textContent;
           }
         }
-      } 
-      
-      else if (
+      } else if (
         display.value.length > 0 &&
-        display.value[display.value.length - 1] !== " "
+        display.value[display.value.length - 1] !== " " &&
+        display.value[display.value.length - 1] !== "."
       ) {
         display.value = display.value + " " + btn.textContent + " ";
       }
-
     } else {
       switch (btn.textContent) {
-        case "C":
+        case "CE":
           display.value = "";
           break;
 
-        case "DEL":
+        case "C":
           if (display.value[display.value.length - 1] === " ") {
             display.value = display.value.slice(0, display.value.length - 3);
           } else {
@@ -44,48 +40,49 @@ btnList.forEach((btn) => {
           break;
 
         case "=":
-          operation(display.value);
+          display.value = operation(display.value);
+          break;
+
+        case "SQRT":
+          display.value = Math.sqrt(display.value);
           break;
       }
     }
   });
 });
 
-//replace 000 with square root
+
+
 
 function operation(operationString) {
   if (operable(operationString)) {
     let operationArr = operationString.split(" ");
 
-    for (let i=0; i < operationArr.length; i++) {
-        if (operationArr[i] === "/") {
-          const division = operationArr[i - 1] / operationArr[i + 1];
-          operationArr.splice(i - 1, 3, `${division}`);
-          i--;
-        }
-        else if (operationArr[i] === "*") {
-          const multiplication =
-            operationArr[i - 1] * operationArr[i + 1];
-          operationArr.splice(i - 1, 3, `${multiplication}`);
-          i--;
-        }
+    for (let i = 0; i < operationArr.length; i++) {
+      if (operationArr[i] === "/") {
+        const division = operationArr[i - 1] / operationArr[i + 1];
+        operationArr.splice(i - 1, 3, `${division}`);
+        i--;
+      } else if (operationArr[i] === "*") {
+        const multiplication = operationArr[i - 1] * operationArr[i + 1];
+        operationArr.splice(i - 1, 3, `${multiplication}`);
+        i--;
+      }
     }
 
-    for (let i=0; i < operationArr.length; i++) {
-        if (operationArr[i] === "+") {
-          const sum = +operationArr[i - 1] + +operationArr[i + 1];
-          operationArr.splice(i - 1, 3, `${sum}`);
-          i--;
-        }
-        else if (operationArr[i] === "-") {
-          const subtraction =
-            operationArr[i - 1] - operationArr[i + 1];
-          operationArr.splice(i - 1, 3, `${subtraction}`);
-          i--;
-        }
+    for (let i = 0; i < operationArr.length; i++) {
+      if (operationArr[i] === "+") {
+        const sum = +operationArr[i - 1] + +operationArr[i + 1];
+        operationArr.splice(i - 1, 3, `${sum}`);
+        i--;
+      } else if (operationArr[i] === "-") {
+        const subtraction = operationArr[i - 1] - operationArr[i + 1];
+        operationArr.splice(i - 1, 3, `${subtraction}`);
+        i--;
+      }
     }
 
-    return operationArr[0]
+    return operationArr[0];
   }
 }
 
