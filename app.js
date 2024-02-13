@@ -23,7 +23,7 @@ btnList.forEach((btn) => {
       } 
       
       else if (
-        display.value.length > 1 &&
+        display.value.length > 0 &&
         display.value[display.value.length - 1] !== " "
       ) {
         display.value = display.value + " " + btn.textContent + " ";
@@ -56,29 +56,36 @@ btnList.forEach((btn) => {
 function operation(operationString) {
   if (operable(operationString)) {
     let operationArr = operationString.split(" ");
-    console.log(operationArr);
-    let index = 0;
 
-    while (index < operationArr.length) {
-      if (operationArr[index] === "/" || operationArr[index] === "*") {
-        if (operationArr[index] === "/") {
-          const division = operationArr[index - 1] / operationArr[index + 1];
-          operationArr.splice(index - 1, 3, `${division}`);
-          index--;
+    for (let i=0; i < operationArr.length; i++) {
+        if (operationArr[i] === "/") {
+          const division = operationArr[i - 1] / operationArr[i + 1];
+          operationArr.splice(i - 1, 3, `${division}`);
+          i--;
         }
-        if (operationArr[index] === "*") {
+        else if (operationArr[i] === "*") {
           const multiplication =
-            operationArr[index - 1] * operationArr[index + 1];
-          operationArr.splice(index - 1, 3, `${multiplication}`);
-          index--;
+            operationArr[i - 1] * operationArr[i + 1];
+          operationArr.splice(i - 1, 3, `${multiplication}`);
+          i--;
         }
-      }
-      index++;
     }
 
-    // console.log(operationArr);
-    // aggiungere la somma e la differenza allo stesso modo della moltiplicazione e divisione
-    //la funzione fa il return del risultato
+    for (let i=0; i < operationArr.length; i++) {
+        if (operationArr[i] === "+") {
+          const sum = +operationArr[i - 1] + +operationArr[i + 1];
+          operationArr.splice(i - 1, 3, `${sum}`);
+          i--;
+        }
+        else if (operationArr[i] === "-") {
+          const subtraction =
+            operationArr[i - 1] - operationArr[i + 1];
+          operationArr.splice(i - 1, 3, `${subtraction}`);
+          i--;
+        }
+    }
+
+    return operationArr[0]
   }
 }
 
@@ -97,7 +104,6 @@ function operable(value) {
 
 function onePoint(checkString) {
   const checkArr = checkString.split(" ");
-  console.log(checkArr);
   if (checkArr[checkArr.length - 1].includes(".")) {
     return false;
   } else {
