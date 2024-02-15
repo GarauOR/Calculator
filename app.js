@@ -40,11 +40,15 @@ btnList.forEach((btn) => {
           break;
 
         case "=":
-          display.value = operation(display.value);
+          display.value?
+          display.value = operation(display.value):
+          display.value = 0;
           break;
 
         case "SQRT":
-          display.value = Math.sqrt(display.value);
+          display.value?
+          display.value = Math.sqrt(display.value):
+          display.value = 0;
           break;
       }
     }
