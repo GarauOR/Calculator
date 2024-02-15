@@ -40,15 +40,13 @@ btnList.forEach((btn) => {
           break;
 
         case "=":
-          display.value?
-          display.value = operation(display.value):
-          display.value = 0;
+          if (operable(display.value)) {display.value = operation(display.value)}
           break;
 
         case "SQRT":
-          display.value?
-          display.value = Math.sqrt(display.value):
-          display.value = 0;
+          if (display.value && !operable(display.value)) {
+            display.value = Math.sqrt(display.value)
+          }
           break;
       }
     }
@@ -59,7 +57,7 @@ btnList.forEach((btn) => {
 
 
 function operation(operationString) {
-  if (operable(operationString)) {
+  
     let operationArr = operationString.split(" ");
 
     for (let i = 0; i < operationArr.length; i++) {
@@ -87,7 +85,7 @@ function operation(operationString) {
     }
 
     return operationArr[0];
-  }
+  
 }
 
 function operable(value) {
