@@ -3,8 +3,9 @@
     border: 2px solid rgb(134, 134, 134);
     margin: auto;
     max-width: 400px;
-    width: 100%;
+    width: 90%;
     height: 40vh;
+    min-height: 300px;
     display: flex;
     flex-direction: column;
     justify-content:space-between;
@@ -32,6 +33,7 @@
 .keyboard-container {
     display: flex;
     height: 80%;
+    gap: 3px;
 }
 
 .column-container {
